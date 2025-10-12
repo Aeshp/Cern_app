@@ -6,12 +6,12 @@ function App() {
     { 
       role: 'cern', 
       content: "Hello! Welcome to Regime. I'm Cern, your product specialist. How can I assist you today?",
-      thought: "Initial greeting message for the user." 
+      thought: "Initial greeting message for the user." // greeting greeting
     }
   ]);
   const [userPrompt, setUserPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [visibleThoughtIndex, setVisibleThoughtIndex] = useState(null); // Tracks which thought to show
+  const [visibleThoughtIndex, setVisibleThoughtIndex] = useState(null); // indicates which thought to display
   const chatWindowRef = useRef(null);
 
   const API_URL = process.env.REACT_APP_API_URL;
