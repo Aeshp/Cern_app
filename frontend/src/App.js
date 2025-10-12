@@ -3,8 +3,8 @@ import './App.css';
 
 function App() {
   const [history, setHistory] = useState([
-    { 
-      role: 'cern', 
+    {
+      role: 'cern',
       content: "Hello! Welcome to Regime. I'm Cern, your product specialist. How can I assist you today?",
       thought: "Initial greeting message for the user." // greeting greeting
     }
@@ -29,7 +29,7 @@ function App() {
     const newUserMessage = { role: 'user', content: userPrompt };
     const currentHistory = [...history, newUserMessage];
     setHistory(currentHistory);
-    
+
     setIsLoading(true);
     setUserPrompt('');
 
@@ -38,29 +38,35 @@ function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          history: history, 
+          history: history,
           user_prompt: userPrompt
         })
       });
 
       if (!response.ok) {
+        if (response.status >= 500) {
+            throw new Error("Server error. Please try again later.");
+        } else if (response.status >= 400) {
+            throw new Error("There was a problem with your request. Please try rephrasing.");
+        }
         throw new Error(`API request failed with status ${response.status}`);
       }
 
       const data = await response.json();
-      
+
       // give both thinking and response
-      const cernMessage = { 
-        role: 'cern', 
+      const cernMessage = {
+        role: 'cern',
         content: data.cern_response,
         thought: data.thought_process
       };
-      
+
       setHistory([...currentHistory, cernMessage]);
 
     } catch (error) {
       console.error("Failed to fetch from API:", error);
-      const errorResponse = { role: 'cern', content: "I'm sorry, I'm having trouble connecting to my systems right now. Please try again in a moment." };
+      const errorResponse = { role: 'cern', content: error.message || "I'm sorry, I'm having trouble connecting to my systems right now. Please try again in a moment." };
+      
       setHistory(prevHistory => [...prevHistory, errorResponse]);
     } finally {
       setIsLoading(false);
@@ -95,8 +101,8 @@ function App() {
         {history.map((message, index) => (
           <div key={index} className={`message-wrapper ${message.role}`}>
             <div className="message-bubble">{message.content}</div>
-            
-            {/* thought show button and hide  */}
+
+            {/* thought show button and hide */}
             {message.role === 'cern' && message.thought && (
               <button onClick={() => toggleThoughtVisibility(index)} className="thought-toggle-button">
                 {visibleThoughtIndex === index ? 'Hide Thought' : 'Show Thought'}
@@ -112,7 +118,7 @@ function App() {
             )}
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="message-wrapper cern">
             <div className="message-bubble">
