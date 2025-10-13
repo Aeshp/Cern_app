@@ -11,6 +11,7 @@
 This repository contains the source code for **Cern**, a complete, full-stack AI assistant designed to simulate a human customer service specialist. The project integrates a custom-trained language model with a React frontend and a Python FastAPI backend to deliver a seamless, interactive user experience for the fictional company, **Regime Audio**.
 
 ---
+![Cern application](./assets/Cern.png)
 
 ## The AI Model: From Generalist to Specialist
 
