@@ -170,7 +170,7 @@ def ask_cern(request: ChatRequest):
     
     print(f"--- RAW MODEL OUTPUT ---\n{raw_reply}\n------------------------")
 
-    banned_words = ["deepseek", "gemini", "chatgpt", "openai", "google", "china"]
+    banned_words = ["deepseek", "gemini", "chatgpt", "openai", "google", "china", "Copilot", "Qwen", "Microsoft", "Bytedance"]
     
     for word in banned_words:
         if word in raw_reply.lower():
