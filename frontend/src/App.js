@@ -71,8 +71,11 @@ function App() {
 
       setHistory([...currentHistory, cernMessage]);
 
+       // save seisson id
       if (data.sessionId) {
         setSessionId(data.sessionId);
+
+         // saving in browser cache for next time
         localStorage.setItem('cernSessionId', data.sessionId);
       }
 
