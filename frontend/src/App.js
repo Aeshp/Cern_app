@@ -6,15 +6,24 @@ function App() {
     {
       role: 'cern',
       content: "Hello! Welcome to Regime. I'm Cern, your product specialist. How can I assist you today?",
-      thought: "Initial greeting message for the user." // greeting greeting
+      thought: "Initial greeting message for the user."
     }
   ]);
   const [userPrompt, setUserPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [visibleThoughtIndex, setVisibleThoughtIndex] = useState(null); // indicates which thought to display
+  const [visibleThoughtIndex, setVisibleThoughtIndex] = useState(null);
+  const [sessionId, setSessionId] = useState(null);
+
   const chatWindowRef = useRef(null);
 
   const API_URL = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    const existingSessionId = localStorage.getItem('cernSessionId');
+    if (existingSessionId) {
+      setSessionId(existingSessionId);
+    }
+  }, []); 
 
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -38,8 +47,8 @@ function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          history: history,
-          user_prompt: userPrompt
+          sessionId: sessionId, 
+          userPrompt: userPrompt
         })
       });
 
@@ -54,7 +63,6 @@ function App() {
 
       const data = await response.json();
 
-      // give both thinking and response
       const cernMessage = {
         role: 'cern',
         content: data.cern_response,
@@ -62,6 +70,13 @@ function App() {
       };
 
       setHistory([...currentHistory, cernMessage]);
+
+      // save seisson id
+      if (data.sessionId) {
+        setSessionId(data.sessionId);
+        // saving in browser cache for next time
+        localStorage.setItem('cernSessionId', data.sessionId);
+      }
 
     } catch (error) {
       console.error("Failed to fetch from API:", error);
@@ -102,14 +117,12 @@ function App() {
           <div key={index} className={`message-wrapper ${message.role}`}>
             <div className="message-bubble">{message.content}</div>
 
-            {/* thought show button and hide */}
             {message.role === 'cern' && message.thought && (
               <button onClick={() => toggleThoughtVisibility(index)} className="thought-toggle-button">
                 {visibleThoughtIndex === index ? 'Hide Thought' : 'Show Thought'}
               </button>
             )}
 
-            {/* render the thought bubble */}
             {visibleThoughtIndex === index && message.thought && (
               <div className="thought-bubble">
                 <strong>Cern's Thought Process:</strong>
