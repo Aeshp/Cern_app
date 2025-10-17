@@ -15,7 +15,7 @@ function App() {
   const [sessionId, setSessionId] = useState(null);
 
   const chatWindowRef = useRef(null);
-
+  
   const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -71,10 +71,8 @@ function App() {
 
       setHistory([...currentHistory, cernMessage]);
 
-      // save seisson id
       if (data.sessionId) {
         setSessionId(data.sessionId);
-        // saving in browser cache for next time
         localStorage.setItem('cernSessionId', data.sessionId);
       }
 
@@ -99,7 +97,7 @@ function App() {
         <div className="header-content">
           <span className="sparkle left">✦</span>
           <div className="logo-container">
-            <svg className="logo-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="logo-icon" width="48" height="48" viewBox="0 0 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="48" height="48" rx="12" fill="#1E40AF"/>
               <circle cx="24" cy="18" r="3" fill="white"/>
               <rect x="18" y="28" width="4" height="8" rx="1" fill="white"/>
@@ -151,7 +149,7 @@ function App() {
             disabled={isLoading}
           />
           <button type="submit" disabled={isLoading || !userPrompt.trim()} title="Send Message">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24" fill="white">
               <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
             </svg>
           </button>
@@ -162,3 +160,4 @@ function App() {
 }
 
 export default App;
+
