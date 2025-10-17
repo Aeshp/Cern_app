@@ -1,0 +1,36 @@
+# Dependencies
+/node_modules
+
+# Environment Variables
+.env
+.env.local
+
+
+# MongoDB Playground Files
+*.mongodb.js
+
+# Production Build Output
+/dist
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Test Coverage Reports
+/coverage
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Operating System Files
+.DS_Store
+Thumbs.db
