@@ -272,3 +272,66 @@ body {
 .chat-input-form button svg {
   transform: translateX(1px);
 }
+
+.chat-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.workflow-button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  white-space: nowrap; 
+}
+
+.workflow-button:hover {
+  background-color: #e0e0e0;
+}
+
+.workflow-popup {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 350px; 
+  z-index: 10;
+  padding: 10px;
+}
+
+.workflow-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workflow-popup li {
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.workflow-popup li:hover {
+  background-color: #f5f5f5;
+}
+
+.workflow-popup a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  font-size: 14px;
+}
+
+.workflow-popup a strong {
+  color: #1E40AF;
+  display: block;
+  margin-bottom: 2px;
+}
