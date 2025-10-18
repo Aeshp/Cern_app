@@ -13,6 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [visibleThoughtIndex, setVisibleThoughtIndex] = useState(null);
   const [sessionId, setSessionId] = useState(null);
+  const [isWorkflowVisible, setIsWorkflowVisible] = useState(false);
 
   const chatWindowRef = useRef(null);
   
@@ -143,6 +144,39 @@ function App() {
       </div>
 
       <div className="chat-input-container">
+        {}
+        {isWorkflowVisible && (
+          <div className="workflow-popup">
+            <ul>
+              <li>
+                <a href="https://github.com/Aeshp/deepseekR1finetune" target="_blank" rel="noopener noreferrer">
+                  <strong>Step 1. Github</strong> (Train Your model, Check Training Code)
+                </a>
+              </li>
+              <li>
+                <a href="https://huggingface.co/Aeshp/deepseekR1tunedchat" target="_blank" rel="noopener noreferrer">
+                  <strong>Step 2. Huggingface Model</strong> (You can use this too.)
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/Aeshp/Cern_app" target="_blank" rel="noopener noreferrer">
+                  <strong>Step 3. A Full Assistent Setup</strong> (Model Hosting, Model backend in HF Space (Docker), APP Backend and Frontend)
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {}
+        <button 
+          className="workflow-button" 
+          onClick={() => setIsWorkflowVisible(!isWorkflowVisible)}
+          title="Show Workflow"
+        >
+          Workflow
+        </button>
+
+        {}
         <form onSubmit={handleSubmit} className="chat-input-form">
           <input
             type="text"
@@ -161,6 +195,8 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;
 
