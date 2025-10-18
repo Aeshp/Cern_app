@@ -335,3 +335,7 @@ body {
   display: block;
   margin-bottom: 2px;
 }
+
+.chat-input-form {
+  flex-grow: 1;
+}
